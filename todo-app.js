@@ -24,8 +24,7 @@ document.querySelector('#new-todo').addEventListener('submit', (e) => {
         });
         saveTodos(todos)
         renderTodos(todos, filters);
-        text = '';
-
+        e.target.elements.text.value = '';
     }
 
 

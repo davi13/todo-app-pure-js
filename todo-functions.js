@@ -59,7 +59,8 @@ const renderTodos = (todos, filters) => {
 
 // Get the DOM elements for an individual note
 const generateTodoDOM = (todo) => {
-    const element = document.createElement('div');
+    const element = document.createElement('label');
+    const containerEl = document.createElement('div');
     const checkBox = document.createElement('input');
     const todoText = document.createElement('span');
     const removeButton = document.createElement('button');
@@ -67,7 +68,7 @@ const generateTodoDOM = (todo) => {
     //Setup todo checkbox
     checkBox.setAttribute('type', 'checkbox');
     checkBox.checked = todo.completed;
-    element.appendChild(checkBox);
+    containerEl.appendChild(checkBox);
     checkBox.addEventListener('change', () => {
         toggleTodo(todo.id);
         saveTodos(todos);
@@ -77,17 +78,21 @@ const generateTodoDOM = (todo) => {
 
     //Setup todo text
     todoText.textContent = todo.text
-    element.appendChild(todoText);
+    containerEl.appendChild(todoText);
+    //Setup conatiner
+    element.classList.add('list-item');
+    containerEl.classList.add('list-item__container');
+    element.appendChild(containerEl);
 
     //Setup todo button
-    removeButton.textContent = 'X';
+    removeButton.textContent = 'remove';
+    removeButton.classList.add('button', 'button--text')
     element.appendChild(removeButton);
     removeButton.addEventListener('click', () => {
         removeTodo(todo.id);
         saveTodos(todos);
         renderTodos(todos, filters);
     })
-
 
     return element
 }
