@@ -16,7 +16,7 @@ const setFilters = (updates) => {
         filters.searchText = updates.searchText;
 
     }
-    if (typeof updates.hideCompleted === false) {
+    if (typeof updates.hideCompleted === 'boolean') {
         filters.hideCompleted = updates.hideCompleted;
     }
 }
