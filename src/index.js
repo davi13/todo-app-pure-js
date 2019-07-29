@@ -1,9 +1,14 @@
-import uuid from 'uuid/v4';
+import uuidv4 from 'uuid/v4';
 import { renderTodos } from './views'
-renderTodos(todos, filters);
+import { getFilters, setFilters } from './filters'
+renderTodos();
 
 document.querySelector('#search-text').addEventListener('input', (e) => {
-    filters.searchText = e.target.value;
+    setFilters({
+        searchText: e.target.value
+    })
+    // filters.searchText = e.target.value;
+    //lol
     renderTodos(todos, filters);
 })
 

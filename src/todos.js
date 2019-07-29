@@ -17,7 +17,7 @@ const saveTodos = () => {
 // Arguments: none
 // Return value: todos array
 const getTodos = () => {
-
+    return todos;
 }
 // createTodo
 // Arguments: todo text
@@ -38,5 +38,6 @@ const removeTodo = (todoId) => {
 const toggleTodo = (todoId) => {
 
 }
+loadTodos();
 // Make sure to call loadTodos and setup the exports
 export { loadTodos, saveTodos, getTodos, createTodo, removeTodo, toggleTodo };
