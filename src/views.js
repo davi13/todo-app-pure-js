@@ -1,4 +1,4 @@
-import { getTodos } from './todos';
+import { getTodos, toggleTodo, removeTodo } from './todos';
 import { getFilters, setFilters } from "./filters";
 
 
@@ -52,8 +52,7 @@ const generateTodoDOM = (todo) => {
     containerEl.appendChild(checkBox);
     checkBox.addEventListener('change', () => {
         toggleTodo(todo.id);
-        saveTodos(todos);
-        renderTodos(todos, filters);
+        renderTodos();
 
     })
 
@@ -71,10 +70,9 @@ const generateTodoDOM = (todo) => {
     element.appendChild(removeButton);
     removeButton.addEventListener('click', () => {
         removeTodo(todo.id);
-        saveTodos(todos);
-        renderTodos(todos, filters);
+        renderTodos();
     })
-    return todo
+    return element
 }
 // generateSummaryDOM
 // Arguments: incompletedTodos
@@ -82,8 +80,8 @@ const generateTodoDOM = (todo) => {
 const generateSummaryDOM = (incompletedTodos) => {
     const summary = document.createElement('h2');
     summary.classList.add('list-title');
-    const plural = incompleteTodos.length === 1 ? '' : 's';
-    summary.textContent = `You have ${incompleteTodos.length} todo${plural} left`;
+    const plural = incompletedTodos.length === 1 ? '' : 's';
+    summary.textContent = `You have ${incompletedTodos.length} todo${plural} left`;
     return summary
 
 }
