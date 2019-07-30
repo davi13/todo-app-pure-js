@@ -1,13 +1,8 @@
 import { getTodos, toggleTodo, removeTodo } from './todos';
 import { getFilters, setFilters } from "./filters";
 
-
-// renderTodos
-// Arguments: none
-// Return value: none
 const renderTodos = () => {
     const todoEl = document.querySelector('#todos');
-    // const filters = getFilters();
     const { searchText, hideCompleted } = getFilters()
     const filteredTodos = getTodos().filter((todo) => {
         const searchTextMatch = todo.text.toLowerCase().includes(searchText.toLowerCase())
@@ -37,9 +32,6 @@ const renderTodos = () => {
 
 }
 
-// generateTodoDOM
-// Arguments: todo
-// Return value: the todo element
 const generateTodoDOM = (todo) => {
     const element = document.createElement('label');
     const containerEl = document.createElement('div');
@@ -75,9 +67,7 @@ const generateTodoDOM = (todo) => {
     })
     return element
 }
-// generateSummaryDOM
-// Arguments: incompletedTodos
-// Return value: the summary element
+
 const generateSummaryDOM = (incompletedTodos) => {
     const summary = document.createElement('h2');
     summary.classList.add('list-title');
@@ -86,5 +76,5 @@ const generateSummaryDOM = (incompletedTodos) => {
     return summary
 
 }
-// Make sure to set up the exports
+
 export { renderTodos, generateTodoDOM, generateSummaryDOM };
