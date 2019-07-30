@@ -1,6 +1,6 @@
 import { renderTodos } from './views'
 import { setFilters, getFilters } from './filters'
-import { getTodos, createTodo } from './todos';
+import { getTodos, createTodo, removeTodo, toggleTodo } from './todos';
 renderTodos();
 
 document.querySelector('#new-todo').addEventListener('submit', (e) => {

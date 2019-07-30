@@ -1,4 +1,6 @@
+import { getTodos } from './todos';
 import { getFilters, setFilters } from "./filters";
+
 
 // renderTodos
 // Arguments: none
@@ -6,10 +8,7 @@ import { getFilters, setFilters } from "./filters";
 const renderTodos = () => {
     const todoEl = document.querySelector('#todos');
     const filters = getFilters();
-    const todos = setFilters();
-    console.log(todos);
-    debugger;
-    const filteredTodos = todos.filter((todo) => {
+    const filteredTodos = getTodos().filter((todo) => {
         const searchTextMatch = todo.text.toLowerCase().includes(filters.searchText.toLowerCase())
         const hideCompletedMatch = !filters.hideCompleted || !todo.completed
 
@@ -41,12 +40,51 @@ const renderTodos = () => {
 // Arguments: todo
 // Return value: the todo element
 const generateTodoDOM = (todo) => {
+    const element = document.createElement('label');
+    const containerEl = document.createElement('div');
+    const checkBox = document.createElement('input');
+    const todoText = document.createElement('span');
+    const removeButton = document.createElement('button');
+
+    //Setup todo checkbox
+    checkBox.setAttribute('type', 'checkbox');
+    checkBox.checked = todo.completed;
+    containerEl.appendChild(checkBox);
+    checkBox.addEventListener('change', () => {
+        toggleTodo(todo.id);
+        saveTodos(todos);
+        renderTodos(todos, filters);
+
+    })
+
+    //Setup todo text
+    todoText.textContent = todo.text
+    containerEl.appendChild(todoText);
+    //Setup conatiner
+    element.classList.add('list-item');
+    containerEl.classList.add('list-item__container');
+    element.appendChild(containerEl);
+
+    //Setup todo button
+    removeButton.textContent = 'remove';
+    removeButton.classList.add('button', 'button--text')
+    element.appendChild(removeButton);
+    removeButton.addEventListener('click', () => {
+        removeTodo(todo.id);
+        saveTodos(todos);
+        renderTodos(todos, filters);
+    })
     return todo
 }
 // generateSummaryDOM
 // Arguments: incompletedTodos
 // Return value: the summary element
 const generateSummaryDOM = (incompletedTodos) => {
+    const summary = document.createElement('h2');
+    summary.classList.add('list-title');
+    const plural = incompleteTodos.length === 1 ? '' : 's';
+    summary.textContent = `You have ${incompleteTodos.length} todo${plural} left`;
+    return summary
 
 }
 // Make sure to set up the exports
